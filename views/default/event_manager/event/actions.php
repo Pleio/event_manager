@@ -13,8 +13,24 @@
 	}
 	
 	if (elgg_is_logged_in()) {
-		if ($rsvp = elgg_view("event_manager/event/rsvp", $vars)) {
-			$options[] = $rsvp;
+		if ($event->openForRegistration() && !$event->getRelationshipByUser()) {
+			$register_link = '/action/event_manager/event/rsvp?guid='.$event->getGUID() . "&type=" . EVENT_MANAGER_RELATION_ATTENDING;
+			
+			$register_button = elgg_view('output/url', array(
+				"class" => "elgg-button elgg-button-submit", 
+				"href" => $register_link, 
+				"is_action" => true,
+				"text" => elgg_echo('event_manager:event:register:register_link')));
+
+			if ($vars["full_view"]) {
+				$register_button = "<div class='center'>" . $register_button . "</div>";
+			}			
+
+			$options[] = $register_button;
+		} else {
+			if ($rsvp = elgg_view("event_manager/event/rsvp", $vars)) {
+				$options[] = $rsvp;
+			}
 		}
 
 		if (!in_array($context, array("widgets", "maps"))) {
@@ -26,7 +42,10 @@
 		if ($event->register_nologin && $event->openForRegistration()) {
 			$register_link = '/events/event/register/'.$event->getGUID();
 			
-			$register_button = elgg_view('output/url', array("class" => "elgg-button elgg-button-submit", "href" => $register_link, "text" => elgg_echo('event_manager:event:register:register_link')));
+			$register_button = elgg_view('output/url', array(
+				"class" => "elgg-button elgg-button-submit", 
+				"href" => $register_link, 
+				"text" => elgg_echo('event_manager:event:register:register_link')));
 
 			if ($vars["full_view"]) {
 				$register_button = "<div class='center'>" . $register_button . "</div>";
