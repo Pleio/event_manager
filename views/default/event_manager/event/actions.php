@@ -13,7 +13,7 @@
 	}
 	
 	if (elgg_is_logged_in()) {
-		if ($event->openForRegistration() && !$event->getRelationshipByUser()) {
+		if ($event->openForRegistration() && !$event->getRelationshipByUser() && !in_array($context, array("widgets", "maps"))) {
 			$register_link = '/action/event_manager/event/rsvp?guid='.$event->getGUID() . "&type=" . EVENT_MANAGER_RELATION_ATTENDING;
 			
 			$register_button = elgg_view('output/url', array(
