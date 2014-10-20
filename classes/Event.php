@@ -134,7 +134,7 @@
 					$result = true;
 				}
 				
-				if ($this->notify_onsignup && ($type !== EVENT_MANAGER_RELATION_ATTENDING_PENDING)) {
+				if ($type !== EVENT_MANAGER_RELATION_ATTENDING_PENDING) {
 					$this->notifyOnRsvp($type, $user_guid);
 				}
 			}
@@ -416,17 +416,19 @@
 				}
 				
 				// notify the onwer of the event
-				$owner_subject = elgg_echo('event_manager:event:registration:notification:owner:subject');
+				if ($this->notify_onsignup) {
+					$owner_subject = elgg_echo('event_manager:event:registration:notification:owner:subject');
+					
+					$owner_message = elgg_echo('event_manager:event:registration:notification:owner:text:' . $type, array(
+						$this->getOwnerEntity()->name,
+						$to_entity->name,
+						$event_title_link));
+					
+					$owner_message .= $registrationLink;
+					
+					notify_user($this->getOwnerGUID(), $this->getGUID(), $owner_subject, $owner_message);
+				}
 				
-				$owner_message = elgg_echo('event_manager:event:registration:notification:owner:text:' . $type, array(
-					$this->getOwnerEntity()->name,
-					$to_entity->name,
-					$event_title_link));
-				
-				$owner_message .= $registrationLink;
-				
-				notify_user($this->getOwnerGUID(), $this->getOwnerGUID(), $owner_subject, $owner_message);
-
 				// notify the attending user
 				$user_subject = elgg_echo('event_manager:event:registration:notification:user:subject');
 				
