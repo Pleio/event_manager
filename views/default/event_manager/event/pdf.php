@@ -22,9 +22,11 @@
 	if($organizer = $event->organizer){
 		$event_details .= '<tr><td><b>'.elgg_echo('event_manager:edit:form:organizer').'</b></td><td>: '.$organizer.'</td></tr>';
 	}
-	
+
 	if($description = $event->description){
-		$event_details .= '<tr><td><b>'.elgg_echo('description').'</b></td><td>: '. $description .'</td></tr>';
+		$event_details .= "</table>";
+		$event_details .= '<b>'.elgg_echo('description').'</b>:<br />'. $description;
+		$event_details .= "<table>";
 	}
 	
 	if($region = $event->region){
@@ -38,5 +40,5 @@
 	$event_details .= "</table>";
 	
 	$output .= $event_details;
-		
+	
 	echo $output;
