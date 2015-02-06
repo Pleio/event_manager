@@ -39,13 +39,12 @@
 			$title = $title_text . " '" . $event->title . "'";
 			
 			if ($event->hide_owner_block) {
-				?>
+				$form .= "
 					<style type='text/css'>
 						.elgg-sidebar .elgg-owner-block {
 							display: none;
 						}
-					</style>
-				<?php
+					</style>";
 			}
 						
 			$body = elgg_view_layout('content', array(
