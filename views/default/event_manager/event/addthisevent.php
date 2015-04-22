@@ -30,14 +30,15 @@ $organizer = $event->organizer;
 <span class="addthisevent">
 	<?php echo $link; ?>
 	<div>
-		<span class="_start"><?php echo $start; ?></span>
-		<span class="_end"><?php echo $end; ?></span>
-		<span class="_summary"><?php echo $title; ?></span>
-		<span class="_description"><?php echo $description; ?></span>
-		<span class="_location"><?php echo $location; ?></span>
-		<span class="_organizer"><?php echo $organizer;?></span>
-		<span class="_organizer_email">noreply</span>
-		<span class="_date_format">YYYY-MM-DD</span>
+		<span class="start"><?php echo $start; ?></span>
+		<span class="end"><?php echo $end; ?></span>
+		<span class="timezone"><?php echo date_default_timezone_get(); ?></span>
+		<span class="title"><?php echo $title; ?></span>
+		<span class="description"><?php echo $description; ?></span>
+		<span class="location"><?php echo $location; ?></span>
+		<span class="organizer"><?php echo $organizer;?></span>
+		<span class="organizer_email">noreply</span>
+		<span class="date_format">YYYY-MM-DD</span>
 	</div>
 </span>
 
