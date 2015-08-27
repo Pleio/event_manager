@@ -1,0 +1,14 @@
+{
+    "name": "pleio/event_manager",
+    "description": "Manage events in ELGG",
+    "type": "elgg-plugin",
+    "keywords": ["elgg", "plugin", "events"],
+    "license": "GPL-2.0",
+    "support": {
+        "source": "https://github.com/Pleio/event_manager",
+        "issues": "https://github.com/Pleio/event_manager/issues"
+    },
+    "require": {
+        "composer/installers": "^1.0.8"
+    }
+}
