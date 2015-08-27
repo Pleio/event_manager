@@ -392,20 +392,20 @@ $extra_body .= "</table>";
 
 $tabs = array(
 			array(
-				"text" => "Profile",
+				"text" => elgg_echo('event_manager:tab:profile'),
 				"href" => "#event-manager-forms-event-edit-profile",
-				"selected" => true	
+				"selected" => true
 			),
 			array(
-				"text" => "Location",
+				"text" => elgg_echo('event_manager:tab:location'),
 				"href" => "#event-manager-forms-event-edit-location",
 			),
 			array(
-				"text" => "Registration",
+				"text" => elgg_echo('event_manager:tab:registration'),
 				"href" => "#event-manager-forms-event-edit-registration",
 			),
 			array(
-				"text" => "Extra",
+				"text" => elgg_echo('event_manager:tab:extra'),
 				"href" => "#event-manager-forms-event-edit-extra",
 			),
 		);

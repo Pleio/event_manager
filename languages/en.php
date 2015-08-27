@@ -21,6 +21,11 @@
 		'event_manager:menu:unsubscribe_confirm' => "Confirm unsubscription",
 		'event_manager:menu:registration:completed' => "Event registration completed",
 
+		'event_manager:tab:profile' => 'Profile',
+		'event_manager:tab:location' => 'Location',
+		'event_manager:tab:registration' => 'Registration',
+		'event_manager:tab:extra' => 'Extra',
+
 		'event_manager:notification:subject' => "An event has been created",
 		'event_manager:notification:body' => "%s created a new event %s",
 
