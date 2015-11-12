@@ -1,6 +1,10 @@
 <?php
 
-	define("EVENT_MANAGER_FORMAT_DATE_EVENTDAY", "Y-m-d");
+	if (get_current_language() == "nl") {
+		define("EVENT_MANAGER_FORMAT_DATE_EVENTDAY", "d-m-Y");
+	} else {
+		define("EVENT_MANAGER_FORMAT_DATE_EVENTDAY", "Y-m-d");
+	}
 
 	define("EVENT_MANAGER_SEARCH_LIST_LIMIT", 10);
 	define("EVENT_MANAGER_SEARCH_LIST_MAPS_LIMIT", 50);

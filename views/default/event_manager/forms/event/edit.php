@@ -69,8 +69,12 @@ if ($event = $vars['entity']) {
 		$fields["start_day"] = date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $fields["start_day"]);
 	}
 	if (empty($fields["end_ts"])) {
-		$start_date = explode('-', $fields["start_day"]);
-		$fields["end_ts"] = mktime($fields["start_time_hours"], $fields["start_time_minutes"], 1, $start_date[1],$start_date[2],$start_date[0]) + 3600;
+		$start_date = DateTime::createFromFormat(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $fields['start_day']);
+		$fields["end_ts"] = mktime($fields["start_time_hours"], $fields["start_time_minutes"], 1,
+			$start_date->format("n"),
+			$start_date->format("j"),
+			$start_date->format("Y")
+		) + 3600;
 	}
 	
 	$fields["end_day"] = date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $fields["end_ts"]);
@@ -95,12 +99,27 @@ $general_body .= "<table id='event-manager-forms-event-edit-general' class='mbl'
 $general_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('title') . " *</td><td colspan='4'>" . elgg_view('input/text', array('name' => 'title', 'value' => $fields["title"])) . "</td></tr>";
 
 $general_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:start') . " *</td>";
-$general_body .= "<td>" . elgg_view('input/date', array('name' => 'start_day', 'id' => 'start_day', 'value' => $fields["start_day"], "class" => "event_manager_event_edit_date")) . " ";
+
+$general_body .= "<td>" . elgg_view('input/date', array(
+	'name' => 'start_day',
+	'id' => 'start_day',
+	'value' => $fields["start_day"],
+	'class' => 'event_manager_event_edit_date',
+	'localized' => EVENT_MANAGER_FORMAT_DATE_EVENTDAY
+)) . " ";
+
 $general_body .= event_manager_get_form_pulldown_hours('start_time_hours', date('H', $fields["start_time"]));
 $general_body .= event_manager_get_form_pulldown_minutes('start_time_minutes', date('i', $fields["start_time"]));
 
 $general_body .= elgg_echo('event_manager:edit:form:end') . " * ";
-$general_body .= elgg_view('input/date', array('name' => 'end_day', 'id' => 'end_day', 'value' => $fields["end_day"], "class" => "event_manager_event_edit_date")) . " ";
+$general_body .= elgg_view('input/date', array(
+	'name' => 'end_day',
+	'id' => 'end_day',
+	'value' => $fields["end_day"],
+	'class' => 'event_manager_event_edit_date',
+	'localized' => EVENT_MANAGER_FORMAT_DATE_EVENTDAY
+)) . " ";
+
 $general_body .= event_manager_get_form_pulldown_hours('end_time_hours', date('H', $fields["end_ts"]));
 $general_body .= event_manager_get_form_pulldown_minutes('end_time_minutes', date('i', $fields["end_ts"])) . "</td></tr>";
 
@@ -287,7 +306,8 @@ $registration_body .= "<tr><td class='event_manager_event_edit_label'>" . elgg_e
 $registration_body .= elgg_view('input/date', array(
 		'name' => 'endregistration_day',
 		'id' => 'endregistration_day',
-		'value' => (($fields["endregistration_day"] != 0) ? date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $fields["endregistration_day"]) : '')
+		'value' => (($fields["endregistration_day"] != 0) ? date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $fields["endregistration_day"]) : ''),
+		'localized' => EVENT_MANAGER_FORMAT_DATE_EVENTDAY
 ));
 $registration_body .= "<br />";
 

@@ -48,23 +48,38 @@
 	
 	$waiting_list_enabled = get_input("waiting_list_enabled");
 	
+	// start time stored in seperate metadata fields (start_time, start_time_hours, start_time_minutes)
 	$start_time_hours = get_input("start_time_hours");
 	$start_time_minutes = get_input("start_time_minutes");
 	$start_time = mktime($start_time_hours, $start_time_minutes, 1, 0, 0, 0);
-	
+
+	// end time stored in one metadata field (end_ts)
 	if (!empty($end_day)) {
-		$end_date = explode('-', $end_day);
-		$end_ts = mktime($end_time_hours, $end_time_minutes, 1, $end_date[1], $end_date[2], $end_date[0]);
+		$end_day = DateTime::createFromFormat(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $end_day);
+		$end_ts = mktime($end_time_hours, $end_time_minutes, 1,
+			$end_day->format("n"),
+			$end_day->format("j"),
+			$end_day->format("Y")
+		);
 	}
-	
+
 	$forward_url = REFERER;
-	
+
 	if(!empty($start_day)) {
-		$date = explode('-',$start_day);
-		$start_day = mktime(0,0,1,$date[1],$date[2],$date[0]);
-		
-		$start_ts = mktime($start_time_hours, $start_time_minutes, 1, $date[1], $date[2], $date[0]);
-		
+		$start_day = DateTime::createFromFormat(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $start_day);
+
+		$start_ts = mktime($start_time_hours, $start_time_minutes, 1,
+			$start_day->format("n"),
+			$start_day->format("j"),
+			$start_day->format("Y")
+		);
+
+		$start_day = mktime(0,0,1,
+			$start_day->format("n"),
+			$start_day->format("j"),
+			$start_day->format("Y")
+		);
+
 		if (!empty($end_ts) && ($end_ts < $start_ts)) {
 			register_error("End time has to be after start time");
 			forward(REFERER);
@@ -72,8 +87,12 @@
 	}
 
 	if(!empty($endregistration_day)) {
-		$date_endregistration_day = explode('-',$endregistration_day);
-		$endregistration_day = mktime(0,0,1,$date_endregistration_day[1],$date_endregistration_day[2],$date_endregistration_day[0]);
+		$endregistration_day = DateTime::createFromFormat(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $endregistration_day);
+		$endregistration_day = mktime(0,0,1,
+			$endregistration_day->format("n"),
+			$endregistration_day->format("j"),
+			$endregistration_day->format("Y")
+		);
 	}
 	
 	if(!empty($guid) && $entity = get_entity($guid)) {
@@ -142,6 +161,7 @@
 		$event->event_type = $event_type;
 		$event->organizer = $organizer;
 		$event->fee = $fee;
+
 		$event->start_day = $start_day;
 		$event->start_time = $start_time;
 		

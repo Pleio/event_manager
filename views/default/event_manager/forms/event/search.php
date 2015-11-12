@@ -20,8 +20,17 @@
 	$form_body .= "<table><tr><td class='prl'>";
 	
 	$form_body .= "<table>";
-	$form_body .= "<tr><td class='prm'>" . elgg_echo('event_manager:edit:form:start_day:from') . ':</td><td>' . elgg_view('input/date', array('name' => 'start_day', 'id' => 'start_day')).'</td></tr>';
-	$form_body .= "<tr><td class='prm'>" . elgg_echo('event_manager:edit:form:start_day:to').':</td><td>'.elgg_view('input/date', array('name' => 'end_day', 'id' => 'end_day')).'</td></tr>';
+	$form_body .= "<tr><td class='prm'>" . elgg_echo('event_manager:edit:form:start_day:from') . ':</td><td>' . elgg_view('input/date', array(
+		'name' => 'start_day',
+		'id' => 'start_day',
+		'localized' => EVENT_MANAGER_FORMAT_DATE_EVENTDAY
+	)).'</td></tr>';
+
+	$form_body .= "<tr><td class='prm'>" . elgg_echo('event_manager:edit:form:start_day:to').':</td><td>'.elgg_view('input/date', array(
+		'name' => 'end_day',
+		'id' => 'end_day',
+		'localized' => EVENT_MANAGER_FORMAT_DATE_EVENTDAY
+	)).'</td></tr>';
 	$form_body .= "</table>";
 	
 	$form_body .= "</td>";

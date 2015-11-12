@@ -51,14 +51,22 @@
 		}
 		
 		if(!empty($start_day)) {
-			$start_day = explode('-',$start_day);
-			$start_day_ts 	= mktime(0,	0,	1,	$start_day[1],	$start_day[2],	$start_day[0]);
+			$start_day = DateTime::createFromFormat(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $start_day);
+			$start_day_ts 	= mktime(0,	0, 1,
+				$start_day->format("n"),
+				$start_day->format("j"),
+				$start_day->format("Y")
+			);
 			$options['start_day'] = $start_day_ts;
 		}
 		
 		if(!empty($end_day)) {
-			$end_day = explode('-',$end_day);
-			$end_day_ts 	= mktime(23,59,	59,	$end_day[1], $end_day[2], $end_day[0]);
+			$end_day = DateTime::createFromFormat(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $end_day);
+			$end_day_ts 	= mktime(23, 59, 59,
+				$end_day->format("n"),
+				$end_day->format("j"),
+				$end_day->format("Y")
+			);
 			$options['end_day'] = $end_day_ts;
 		}
 		
