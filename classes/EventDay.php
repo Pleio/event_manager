@@ -16,7 +16,7 @@
 				'relationship_guid' => $this->getGUID(),
 				'relationship' => 'event_day_slot_relation',
 				'inverse_relationship' => true,
-				'order_by_metadata' => array("name" => "start_time", "as" => "interger"),
+				'order_by_metadata' => array("name" => "start_time", "as" => "integer"),
 				'limit' => false
 			);
 		 
