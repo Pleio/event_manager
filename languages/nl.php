@@ -373,5 +373,9 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
   'approve' => 'Goedkeuren',
   'disapprove' => 'Afkeuren',
   'requiredfields' => 'Verplichte velden',
+
+  'event_manager:event:copyevent' => 'Kopieer evenement',
+  'event_manager:action:event:copy:ok' => 'Evenement succesvol gekopieerd.',
+  'event_manager:action:event:copy:error' => 'Er is een probleem opgetreden tijdens het kopieren van het evenement.'
 );
 add_translation("nl", $language);

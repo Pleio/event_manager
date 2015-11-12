@@ -197,6 +197,7 @@
 	// actions
 	elgg_register_action("event_manager/event/edit",					dirname(__FILE__) . "/actions/event/edit.php");
 	elgg_register_action("event_manager/event/delete",					dirname(__FILE__) . "/actions/event/delete.php");
+	elgg_register_action("event_manager/event/copy",					dirname(__FILE__) . "/actions/event/copy.php");
 	elgg_register_action("event_manager/event/rsvp",					dirname(__FILE__) . "/actions/event/rsvp.php");
 	elgg_register_action("event_manager/event/upload",					dirname(__FILE__) . "/actions/event/upload.php");
 	elgg_register_action("event_manager/event/deletefile",				dirname(__FILE__) . "/actions/event/deletefile.php");

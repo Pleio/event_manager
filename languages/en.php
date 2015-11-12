@@ -396,6 +396,10 @@ If you didn't register for this event, you can ignore this email or click on the
 		'disapprove' => 'Disapprove',
 		'requiredfields' => 'Required fields',
 		'confirm' => 'Confirm',
+
+		'event_manager:event:copyevent' => 'Copy event',
+		'event_manager:action:event:copy:ok' => 'Event copied succesfully.',
+		'event_manager:action:event:copy:error' => 'An error occured while saving the new event.'
 	);
 
 	add_translation('en', $english);
