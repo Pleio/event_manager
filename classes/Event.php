@@ -394,9 +394,7 @@
 						}
 					}
 					
-					// temporarily disable unsubscribe link because of bug
-					// unsubscription not always works correctly.
-					/*if ($this->register_nologin) {
+					if ($this->register_nologin) {
 						$link = elgg_get_site_url() . "events/unsubscribe/" . $this->getGUID() . "/" . elgg_get_friendly_title($this->title) . "?e=" . $to_entity->email;
 						
 						$unsubscribeLink = PHP_EOL . PHP_EOL;
@@ -407,7 +405,7 @@
 						} else {
 							$unsubscribeLink .= $link;
 						}
-					}*/
+					}
 				}
 				
 				// make the event title for in the e-mail
@@ -440,8 +438,7 @@
 				
 				$user_message .= $registrationLink;
 				
-				// temporarily disable unsubscribe link because of bug
-				//$user_message .= $unsubscribeLink;
+				$user_message .= $unsubscribeLink;
 				
 				if ($to_entity instanceof ElggUser) {
 					// use notification system for real users

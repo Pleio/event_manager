@@ -11,7 +11,7 @@
 	if (!empty($guid) && ($entity = get_entity($guid))) {
 		if (!empty($email) && is_email_address($email)) {
 			if (elgg_instanceof($entity, "object", Event::SUBTYPE)) {
-				// try to find a registration
+				// try to find a registration by e-mail
 				$options = array(
 					"type" => "object",
 					"subtype" => EventRegistration::SUBTYPE,
@@ -23,6 +23,18 @@
 						"case_sensitive" => false
 					)
 				);
+
+				$registrations = elgg_get_entities_from_metadata($options);
+				if (!$registrations) {
+					$user = get_user_by_email($email);
+					if ($user) {
+						$user = $user[0];
+						if ($entity->isAttending($user->guid)) {
+							register_error(elgg_echo("event_manager:unsubscribe:login"));
+							forward($entity->getURL());
+						}
+					}
+				}
 				
 				if ($registrations = elgg_get_entities_from_metadata($options)) {
 					$registration = $registrations[0];

@@ -351,6 +351,7 @@ If you didn't request to unsubscribe from the event, please disregard this e-mai
 		'event_manager:unsubscribe_confirm:error:code' => "The supplied code is incorrect, please check your e-mail",
 		'event_manager:unsubscribe_confirm:title' => "Confirm unsubscription from: %s",
 		'event_manager:unsubscribe_confirm:description' => "%s you requested to be unsubscribed from %s. To complete the unsubscription please click the confirm button below.",
+		'event_manager:unsubscribe:login' => "To unsubscribe please login above.",
 
 		'event_manager:action:unsubscribe_confirm:error' => "An unknown error occured while unsubscribing you from the event, please try again",
 		'event_manager:action:unsubscribe_confirm:success' => "You have successfully been unsubscribed from the event",

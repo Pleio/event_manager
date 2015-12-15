@@ -58,6 +58,7 @@ Indien u zich niet heeft geregistreerd kunt u deze email negeren of de link volg
   'event_manager:action:register:email:registration_exists' => 'Er bestaat al een registratie voor dit evenement met opgegeven emailadres. Slechts één registratie per emailadres is toegestaan.',
   'event_manager:unsubscribe:title' => 'Uitschrijven uit: %s',
   'event_manager:unsubscribe:description' => 'Indien u zich wilt uitschrijven uit het evenement %s, voor dan uw email hieronder in. Indien voor het opgegeven emailadres een inschrijving wordt gevonden, ontvangt u een verificatie email met daarin verdere instructies.',
+  'event_manager:unsubscribe:login' => 'Om uit te schrijven dient u eerst in te loggen',
   'event_manager:action:unsubscribe:error:no_registration' => 'Geen inschrijving gevonden op basis van het opgegeven emailadres',
   'event_manager:action:unsubscribe:error:mail' => 'Een fout is opgetreden tijdens het versturen van de verificatie email. Probeer het opnieuw.',
   'event_manager:action:unsubscribe:success' => 'Een email is verstuurt om de uitschrijving te bevestigen. Controleer uw inbox.',
