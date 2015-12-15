@@ -88,6 +88,7 @@
 						// make sure we can remove the registration object
 						$EVENT_MANAGER_UNDO_REGISTRATION = true;
 						
+						$this->notifyOnRsvp($type, $user_guid);
 						$user->delete();
 						
 						// undo overrides
