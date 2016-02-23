@@ -382,17 +382,15 @@
 				$registrationLink = "";
 				$unsubscribeLink = "";
 				if ($type == EVENT_MANAGER_RELATION_ATTENDING) {
-					if ($this->registration_needed) {
-						$link = elgg_get_site_url() . 'events/registration/view/?guid=' . $this->getGUID() . '&u_g=' . $to . '&k=' . md5($this->time_created . get_site_secret() . $to);
+					$link = elgg_get_site_url() . 'events/registration/view/?guid=' . $this->getGUID() . '&u_g=' . $to . '&k=' . md5($this->time_created . get_site_secret() . $to);
 
-						$registrationLink = PHP_EOL . PHP_EOL;
-						$registrationLink .= elgg_echo('event_manager:event:registration:notification:program:linktext');
-						$registrationLink .= PHP_EOL . PHP_EOL;
-						if ($html_email_handler_enabled) {
-							$registrationLink .= elgg_view("output/url", array("text" => $link, "href" => $link));
-						} else {
-							$registrationLink .= $link;
-						}
+					$registrationLink = PHP_EOL . PHP_EOL;
+					$registrationLink .= elgg_echo('event_manager:event:registration:notification:program:linktext');
+					$registrationLink .= PHP_EOL . PHP_EOL;
+					if ($html_email_handler_enabled) {
+						$registrationLink .= elgg_view("output/url", array("text" => $link, "href" => $link));
+					} else {
+						$registrationLink .= $link;
 					}
 
 					if ($this->register_nologin) {

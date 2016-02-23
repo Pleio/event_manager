@@ -27,7 +27,6 @@ $fields = array(
 	"registration_ended" => ELGG_ENTITIES_ANY_VALUE,
 	"endregistration_day" => ELGG_ENTITIES_ANY_VALUE,
 	"with_program" => ELGG_ENTITIES_ANY_VALUE,
-	"registration_needed" => ELGG_ENTITIES_ANY_VALUE,
 	"register_nologin" => ELGG_ENTITIES_ANY_VALUE,
 	"show_attendees" => 1,
 	"hide_owner_block" => ELGG_ENTITIES_ANY_VALUE,
@@ -42,7 +41,7 @@ $fields = array(
 	"event_organizing" => 0,
 	"registration_completed" => ELGG_ENTITIES_ANY_VALUE,
 );
-	
+
 $region_options = event_manager_event_region_options();
 $type_options = event_manager_event_type_options();
 
@@ -53,17 +52,17 @@ if ($event = $vars['entity']) {
 	$fields["latitude"] = $event->getLatitude();
 	$fields["longitude"] = $event->getLongitude();
 	$fields["tags"] = string_to_tag_array($event->tags);
-	
+
 	if ($event->icontime) {
 		$currentIcon = '<img src="' . $event->getIcon() . '" />';
 	}
-	
+
 	foreach ($fields as $field => $value) {
 		if (!in_array($field, array("guid", "location", "latitude", "longitude"))) {
 			$fields[$field] = $event->$field;
 		}
 	}
-	
+
 	// convert timestamp to date notation for correct display
 	if (!empty($fields["start_day"])) {
 		$fields["start_day"] = date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $fields["start_day"]);
@@ -76,7 +75,7 @@ if ($event = $vars['entity']) {
 			$start_date->format("Y")
 		) + 3600;
 	}
-	
+
 	$fields["end_day"] = date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $fields["end_ts"]);
 }
 
@@ -141,7 +140,7 @@ if (!empty($currentIcon)) {
 		'name' => 'delete_current_icon',
 		'id' => 'delete_current_icon',
 		'value' => 0,
-		'options' => 
+		'options' =>
 			array(
 				elgg_echo('event_manager:edit:form:delete_current_icon') => '1'
 			)
@@ -273,14 +272,6 @@ $registration_body .= elgg_view('input/checkboxes', array(
 		'value' => $fields["with_program"],
 		'options' => array(
 				elgg_echo('event_manager:edit:form:with_program') => '1'
-		)
-));
-
-$registration_body .= elgg_view('input/checkboxes', array(
-		'name' => 'registration_needed',
-		'value' => $fields["registration_needed"],
-		'options' => array(
-				elgg_echo('event_manager:edit:form:registration_needed') => '1'
 		)
 ));
 
@@ -437,7 +428,7 @@ $form_body .= $profile_body;
 $form_body .= $location_body;
 $form_body .= $registration_body;
 $form_body .= $extra_body;
-				
+
 $form_body .= elgg_view('input/submit', array('value' => elgg_echo('save')));
 $form_body .= '<div class="event_manager_required">(* = ' . elgg_echo('requiredfields') . ')</div>';
 

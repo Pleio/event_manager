@@ -42,8 +42,7 @@ $fields = array(
     'endregistration_day',
     'max_attendees',
     'waiting_list',
-    'with_program',
-    'registration_needed'
+    'with_program'
 );
 
 foreach ($fields as $field) {

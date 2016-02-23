@@ -10,14 +10,14 @@ $notice = true;
 if (!empty($guid) && !empty($rel)) {
 	$event = get_entity($guid);
 	$user = get_entity($user_guid);
-	
+
 	if (!empty($event) && elgg_instanceof($event, "object", Event::SUBTYPE) && !empty($user)) {
 		//echo '- loggedin and relation type is set<br />';
 		if ($rel == EVENT_MANAGER_RELATION_ATTENDING) {
 			//echo '- relation type is \'attending\'<br />';
 			if ($event->hasEventSpotsLeft() && $event->hasSlotSpotsLeft()) {
 				//echo '- event and it\'s slots has spots left<br />';
-				if ($event->registration_needed && $event->generateRegistrationForm()) {
+				if ($event->generateRegistrationForm()) {
 					//echo '- forward to event registration<br />';
 					$forward_url = '/events/event/register/' . $guid . '/' . $rel;
 					$notice = false;
@@ -32,7 +32,7 @@ if (!empty($guid) && !empty($rel)) {
 					//echo '- waiting list is enabled<br />';
 					if ($event->openForRegistration()) {
 						//echo '- event is open for registration (datewise)<br />';
-						if ($event->registration_needed && $event->generateRegistrationForm()) {
+						if ($event->generateRegistrationForm()) {
 							if ($registration = $event->generateRegistrationForm()) {
 								//echo '- event CAN generate a registration form<br />';
 								//echo '- show normal event waiting list<br />';
@@ -62,7 +62,7 @@ if (!empty($guid) && !empty($rel)) {
 				register_error(elgg_echo('event_manager:event:relationship:message:unavailable_relation'));
 			}
 		}
-		
+
 		if ($notice) {
 			if ($rsvp) {
 				system_message(elgg_echo('event_manager:event:relationship:message:' . $rel));

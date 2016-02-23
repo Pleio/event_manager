@@ -85,7 +85,6 @@
 		'event_manager:edit:form:delete_current_icon' => 'Delete current icon?',
 		'event_manager:edit:form:comments_on' => 'Comments on?',
 		'event_manager:edit:form:registration_ended' => 'Disable registration to this event',
-		'event_manager:edit:form:registration_needed' => 'Registration needed to attend?',
 		'event_manager:edit:form:show_attendees' => 'Display attendees?',
 		'event_manager:edit:form:hide_owner_block' => 'Hide owner information in sidebar',
 		'event_manager:edit:form:notify_onsignup' => 'Notify me when someone signs up',

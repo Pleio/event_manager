@@ -65,7 +65,6 @@ $language = array (
   'event_manager:edit:form:delete_current_icon' => 'Supprimer l\'icone actuelle ?',
   'event_manager:edit:form:comments_on' => 'Commentaires activés ?',
   'event_manager:edit:form:registration_ended' => 'Désactiver les inscriptions à cet événement',
-  'event_manager:edit:form:registration_needed' => 'Inscription obligatoire pour participer ?',
   'event_manager:edit:form:show_attendees' => 'afficher les participants ?',
   'event_manager:edit:form:notify_onsignup' => 'Prévenez-moi lorsque quelqu\'un s\'inscrit',
   'event_manager:edit:form:start_day' => 'Date',
