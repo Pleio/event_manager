@@ -169,6 +169,7 @@ Iemand heeft zich afgemeld van het \'%s\' evenement. Je bent van de wachtlijst n
   'event_manager:edit:form:show_attendees' => 'Deelnemers weergeven?',
   'event_manager:edit:form:hide_owner_block' => 'Verberg eigenaarsinformatie in zijbalk',
   'event_manager:edit:form:notify_onsignup' => 'Laat mij weten wanneer deelnemers registreren',
+  'event_manager:edit:form:separate_first_lastname' => 'Vraag voor- en achternaam als losse velden',
   'event_manager:edit:form:start_day' => 'Datum',
   'event_manager:edit:form:start' => 'Start',
   'event_manager:edit:form:end' => 'Eind',
@@ -378,6 +379,10 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
 
   'event_manager:event:copyevent' => 'Kopieer evenement',
   'event_manager:action:event:copy:ok' => 'Evenement succesvol gekopieerd.',
-  'event_manager:action:event:copy:error' => 'Er is een probleem opgetreden tijdens het kopieren van het evenement.'
+  'event_manager:action:event:copy:error' => 'Er is een probleem opgetreden tijdens het kopieren van het evenement.',
+
+  'user:fullname:label' => 'Volledige naam',
+  'user:firstname:label' => 'Voornaam',
+  'user:lastname:label' => 'Achternaam'
 );
 add_translation("nl", $language);

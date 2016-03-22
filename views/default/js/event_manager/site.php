@@ -526,7 +526,12 @@ elgg.event_manager.init = function() {
 	});
 
 	$('#event_manager_event_register').submit(function() {
-		if(($("input[name='question_name']").val() == "") || ($("input[name='question_email']").val() == "")){
+		if (
+            $("input[name='question_name']").val() == "" ||
+            $("input[name='question_firstname']").val() == "" ||
+            $("input[name='question_lastname']").val() == "" ||
+            $("input[name='question_email']").val() == ""
+        ){
 			elgg.register_error(elgg.echo("event_manager:registration:required_fields"));
 			return false;
 		}

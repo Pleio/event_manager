@@ -88,6 +88,7 @@
 		'event_manager:edit:form:show_attendees' => 'Display attendees?',
 		'event_manager:edit:form:hide_owner_block' => 'Hide owner information in sidebar',
 		'event_manager:edit:form:notify_onsignup' => 'Notify me when someone signs up',
+        'event_manager:edit:form:separate_first_lastname' => 'Ask first- and last name separately',
 		'event_manager:edit:form:start' => 'Start',
 		'event_manager:edit:form:end' => 'End',
 		'event_manager:edit:form:start_day' => 'Date',
@@ -401,7 +402,11 @@ If you didn't register for this event, you can ignore this email or click on the
 
 		'event_manager:event:copyevent' => 'Copy event',
 		'event_manager:action:event:copy:ok' => 'Event copied succesfully.',
-		'event_manager:action:event:copy:error' => 'An error occured while saving the new event.'
+		'event_manager:action:event:copy:error' => 'An error occured while saving the new event.',
+
+		'user:fullname:label' => 'Full name',
+        'user:firstname:label' => 'First name',
+        'user:lastname:label' => 'Last name'
 	);
 
 	add_translation('en', $english);

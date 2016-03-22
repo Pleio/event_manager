@@ -252,8 +252,16 @@
 			$form_body = "";
 
 			if (!elgg_is_logged_in()) {
-				$form_body .= elgg_view("event_manager/registration/non_loggedin");
+				$form_body .= elgg_view("event_manager/registration/non_loggedin", array(
+                    'event' => $this
+                ));
 				$show_required = true;
+			} else {
+				if ($this->separate_first_lastname) {
+					$form_body .= elgg_view("event_manager/registration/separate_first_lastname", array(
+						'event' => $this
+					));
+				}
 			}
 
 			if ($registration_form = $this->getRegistrationFormQuestions()) {

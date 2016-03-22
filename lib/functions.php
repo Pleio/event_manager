@@ -294,6 +294,11 @@
 
 		$headerString .= '"'.elgg_echo('guid').'";"'.elgg_echo('name').'";"'.elgg_echo('email').'";"'.elgg_echo('username') . '";"' . elgg_echo('registration date') . '"';
 
+        if ($event->separate_first_lastname) {
+            $headerString .= ';"' . elgg_echo('user:firstname:label') . '"';
+            $headerString .= ';"' . elgg_echo('user:lastname:label') . '"';
+        }
+
 		if($registration_form = $event->getRegistrationFormQuestions()) {
 			foreach($registration_form as $question) {
 				$headerString .= ';"'.$question->title.'"';
@@ -331,10 +336,14 @@
 				$relation = check_entity_relationship($event->guid, EVENT_MANAGER_RELATION_ATTENDING, $attendee->guid);
 				$dataString .= ';"' . date("d-m-Y H:i:s", $relation->time_created) . '"';
 
+				if ($event->separate_first_lastname) {
+					$dataString .= ';"' . $attendee->firstname . '"';
+					$dataString .= ';"' . $attendee->lastname . '"';
+				}
+
 				if($registration_form = $event->getRegistrationFormQuestions()) {
 					foreach($registration_form as $question) {
 						$answer = $question->getAnswerFromUser($attendee->getGUID());
-
 						$answerString .= '"'.addslashes($answer->value).'";';
 					}
 				}

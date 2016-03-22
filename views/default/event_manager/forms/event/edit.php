@@ -30,6 +30,7 @@ $fields = array(
 	"register_nologin" => ELGG_ENTITIES_ANY_VALUE,
 	"show_attendees" => 1,
 	"hide_owner_block" => ELGG_ENTITIES_ANY_VALUE,
+	"separate_first_lastname" => ELGG_ENTITIES_ANY_VALUE,
 	"notify_onsignup" => ELGG_ENTITIES_ANY_VALUE,
 	"max_attendees" => ELGG_ENTITIES_ANY_VALUE,
 	"waiting_list_enabled" => ELGG_ENTITIES_ANY_VALUE,
@@ -387,6 +388,14 @@ $extra_body .= elgg_view('input/checkboxes', array(
 		'value' => $fields["hide_owner_block"],
 		'options' => array(
 				elgg_echo('event_manager:edit:form:hide_owner_block') => '1'
+		)
+));
+
+$extra_body .= elgg_view('input/checkboxes', array(
+		'name' => 'separate_first_lastname',
+		'value' => $fields["separate_first_lastname"],
+		'options' => array(
+				elgg_echo('event_manager:edit:form:separate_first_lastname') => '1'
 		)
 ));
 

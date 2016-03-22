@@ -30,6 +30,7 @@
 	$show_attendees = get_input("show_attendees");
 	$hide_owner_block = get_input("hide_owner_block");
 	$notify_onsignup = get_input("notify_onsignup");
+    $separate_first_lastname = get_input("separate_first_lastname");
 	$endregistration_day = get_input("endregistration_day");
 	$max_attendees = get_input("max_attendees");
 	$waiting_list = get_input("waiting_list");
@@ -149,6 +150,7 @@
 		$event->show_attendees = $show_attendees;
 		$event->hide_owner_block = $hide_owner_block;
 		$event->notify_onsignup = $notify_onsignup;
+		$event->separate_first_lastname = $separate_first_lastname;
 		$event->max_attendees = $max_attendees;
 		$event->waiting_list = $waiting_list;
 		$event->venue = $venue;

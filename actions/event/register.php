@@ -32,7 +32,10 @@
 					}
 					
 					if (empty($user)) {
-						if (empty($answers['name']) || empty($answers['email'])) {
+						if (empty($answers['name']) && (empty($answers['firstname']) || empty($answers['lastname']))) {
+							$requred_error = true;
+						}
+						if (empty($answers['email'])) {
 							$required_error = true;
 						}
 					}
@@ -46,7 +49,14 @@
 			
 			if (empty($user)) {
 				$_SESSION['registerevent_values']['question_name'] = $answers["name"];
+                $_SESSION['registerevent_values']['question_firstname'] = $answers["firstname"];
+                $_SESSION['registerevent_values']['question_lastname'] = $answers["lastname"];
 				$_SESSION['registerevent_values']['question_email']	= $answers["email"];
+				
+				if ($answers['firstname'] && $answers['lastname']) {
+					$answers['name'] = $answers['firstname'] . " " . $answers['lastname'];
+				}
+
 			}
 			
 			if ($event->with_program && !$required_error) {
