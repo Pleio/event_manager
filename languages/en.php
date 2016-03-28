@@ -219,6 +219,7 @@ Someone signed off from the '%s' event. You are moved from the waiting list to a
 		'event_manager:event:viewregistration' => 'View registration',
 		'event_manager:event:noregistrations' => 'No registrations yet',
 		'event_manager:event:exportattendees' => 'Export attendees',
+		'event_manager:event:attendeestogroup' => 'Deelnemers toevoegen aan groep',
 		'event_manager:event:exportwaitinglist' => 'Export waitinglist',
 		'event_manager:event:currentavatar' => 'Current event icon',
 		'event_manager:event:editicon' => 'Edit icon',
@@ -406,7 +407,32 @@ If you didn't register for this event, you can ignore this email or click on the
 
 		'user:fullname:label' => 'Full name',
         'user:firstname:label' => 'First name',
-        'user:lastname:label' => 'Last name'
+        'user:lastname:label' => 'Last name',
+
+		'event_manager:add_attendees_to_group' => 'Add attendees to a group',
+		'event_manager:add_attendees_to_group:select' => 'Add attendees to the group',
+		'event_manager:add_attendees_to_group:add_to_site' => 'Also add attendees to the site',
+		'event_manager:add_attendees_to_group:add_to_site:disabled' => 'This functionality is disabled as you are not a site administrator.',
+		'event_manager:add_attendees_to_group:added' => 'Added %s attendees to the group, added %s attendees to the site.',
+		'event_manager:add_attendees_to_group:submit' => 'Add to group',
+		'event_manager:add_to_group:notification:subject' => 'You have been added to the group: %s',
+		'event_manager:add_to_group:notification:message_password' => 'Hello %s,
+
+		You have been added to the group %s. Go to the following link to view the contents:
+
+		%s
+
+		We created an account for you with the following details:
+		Username: %s
+		Password: %s
+		',
+		'event_manager:add_to_group:notification:message' => 'Hello %s,
+
+		You have been added to the group %s. Go to the following link to view the contents:
+
+		%s
+
+		We used your existing account with username %s to add you to the group. If you lost your password request a new one with the button "lost password".'
 	);
 
 	add_translation('en', $english);

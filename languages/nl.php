@@ -303,6 +303,7 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
   'event_manager:event:viewregistrations' => 'Registraties weergeven',
   'event_manager:event:noregistrations' => 'Er zijn nog geen registraties',
   'event_manager:event:exportattendees' => 'Deelnemers exporteren',
+  'event_manager:event:attendeestogroup' => 'Deelnemers toevoegen aan groep',
   'event_manager:event:viewwaitinglist' => 'Wachtlijst weergeven',
   'event_manager:event:waitinglist:empty' => 'Wachtlijst is leeg',
   'event_manager:event:currentavatar' => 'Huidige evenements icoon',
@@ -383,6 +384,32 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
 
   'user:fullname:label' => 'Volledige naam',
   'user:firstname:label' => 'Voornaam',
-  'user:lastname:label' => 'Achternaam'
+  'user:lastname:label' => 'Achternaam',
+
+  'event_manager:add_attendees_to_group' => 'Deelnemers toevoegen aan groep',
+  'event_manager:add_attendees_to_group:select' => 'Voeg deelnemers toe aan de groep',
+  'event_manager:add_attendees_to_group:add_to_site' => 'De deelnemers ook aan de site toevoegen',
+  'event_manager:add_attendees_to_group:add_to_site:disabled' => 'Deze functionaliteit is niet beschikbaar omdat je geen site-beheerder bent.',
+  'event_manager:add_attendees_to_group:added' => '%s deelnemers toegevoegd aan de groep en %s deelnemers toegevoegd aan de site.',
+  'event_manager:add_attendees_to_group:submit' => 'Voeg toe aan groep',
+  'event_manager:add_to_group:notification:subject' => 'Je bent toegevoegd aan de groep: %s',
+  'event_manager:add_to_group:notification:message_password' => 'Beste %s,
+
+  Je bent toegevoegd aan de groep %s. Gebruik de volgende link om de inhoud te bekijken:
+
+  %s
+
+  Gebruik de volgende gegevens om in te loggen:
+
+  Gebruikersnaam: %s
+  Wachtwoord: %s
+  ',
+  'event_manager:add_to_group:notification:message' => 'Beste %s,
+
+  Je bent toegevoegd aan de groep %s. Gebruik de volgende link om de inhoud te bekijken:
+
+  %s
+
+  We hebben je bestaande account met de gebruikersnaam %s gebruikt om je toe te voegen. Wanneer je het wachtwoord vergeten bent gebruik de "wachtwoord vergeten" knop om een nieuw wachtwoord aan te vragen.'
 );
 add_translation("nl", $language);

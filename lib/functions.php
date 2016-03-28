@@ -678,3 +678,88 @@
 			elgg_send_email($from, $object->email, $subject, $message);
 		}
 	}
+
+	function event_manager_register_attendee($attendee) {
+		global $SUBSITE_MANAGER_IMPORTING_USERS;
+		$SUBSITE_MANAGER_IMPORTING_USERS = true;
+
+		$site = elgg_get_site_entity();
+		$username = event_manager_create_username_from_email($attendee->email);
+		if (!$username) {
+			return null;
+		}
+
+		$password = generate_random_cleartext_password();
+		$guid = register_user($username, $password, $attendee->name, $attendee->email, false);
+		if ($guid) {
+			$user = get_entity($guid);
+			elgg_set_user_validation_status($user->guid, true, "email");
+			return array($user, $password);
+		} else {
+			return null;
+		}
+	}
+
+	function event_manager_create_username_from_email($email) {
+		if (!is_email_address($email)) {
+			return false;
+		}
+
+		list($name, $dummy) = explode("@", $email);
+		$name = trim($name);
+
+		$blacklist2 = '\'/\\"*& ?#%^(){}[]~?<>;|¬`@-+=';
+		for ($n = 0; $n < strlen($blacklist2); $n++) {
+			if (strpos($name, $blacklist2[$n]) !== false) {
+				$name = str_replace($blacklist2[$n], '', $name);
+			}
+		}
+
+		if ($name == "") {
+			return false;
+		}
+
+		// show hidden entities (unvalidated users)
+		$hidden = access_get_show_hidden_status();
+		access_show_hidden_entities(true);
+
+		if (get_user_by_username($name)) {
+			$i = 1;
+
+			while(get_user_by_username($name . $i)){
+				$i++;
+			}
+
+			$result = $name . $i;
+		} else {
+			$result = $name;
+		}
+
+		// restore hidden entities
+		access_show_hidden_entities($hidden);
+
+		return $result;
+	}
+
+	function event_manager_add_to_group_send_notification(ElggUser $user, ElggGroup $group, $password = null) {
+		$subject = elgg_echo("event_manager:add_to_group:notification:subject", array($group->name));
+
+		if ($password) {
+			$message = elgg_echo("event_manager:add_to_group:notification:message_password", array(
+				$user->name,
+				$group->name,
+				$group->getURL(),
+				$user->username,
+				$password
+			));
+		} else {
+			$message = elgg_echo("event_manager:add_to_group:notification:message", array(
+				$user->name,
+				$group->name,
+				$group->getURL(),
+				$user->username
+			));
+		}
+
+		return notify_user($user->guid, $group->guid, $subject, $message, null, "email");
+	}
