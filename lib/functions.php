@@ -680,8 +680,8 @@
 	}
 
 	function event_manager_register_attendee($attendee) {
-		global $SUBSITE_MANAGER_IMPORTING_USERS;
-		$SUBSITE_MANAGER_IMPORTING_USERS = true;
+		elgg_unregister_event_handler('create', 'user', 'user_create_hook_add_site_relationship');
+	    elgg_unregister_event_handler('create', 'user', 'subsite_manager_create_event_handler');
 
 		$site = elgg_get_site_entity();
 		$username = event_manager_create_username_from_email($attendee->email);
@@ -693,6 +693,7 @@
 		$guid = register_user($username, $password, $attendee->name, $attendee->email, false);
 		if ($guid) {
 			$user = get_entity($guid);
+        	add_entity_relationship($guid, 'member_of_site', 1);
 			elgg_set_user_validation_status($user->guid, true, "email");
 			return array($user, $password);
 		} else {

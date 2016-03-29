@@ -54,14 +54,14 @@ foreach ($event->exportAttendees() as $attendee) {
     }
 
     if ($add_to_site && !$site->isUser($user->guid)) {
-        $added_site++;
         $site->addUser($user->guid);
+        $added_site++;
     }
 
     if (!$group->isMember($user)) {
         $group->join($user);
-        $added_group++;
         event_manager_add_to_group_send_notification($user, $group, $password);
+        $added_group++;
     }
 }
 
