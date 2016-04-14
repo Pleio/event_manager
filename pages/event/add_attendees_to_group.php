@@ -19,12 +19,13 @@ elgg_push_breadcrumb(elgg_echo('event_manager:add_attendees_to_group'));
 $user = elgg_get_logged_in_user_entity();
 $groups = array();
 foreach ($user->getGroups(array(), 0, 0) as $group) {
-    if (!$group->canEdit()) { next; }
-    $groups[$group->guid] = $group->name;
+    if ($group->canEdit()) {
+        $groups[$group->guid] = $group->name;
+    }
 }
 
 if (count($groups) == 0) {
-    register_error('event_manager:add_attendees_to_group:no_groups');
+    register_error(elgg_echo('event_manager:add_attendees_to_group:no_groups'));
     forward(REFERER);
 }
 

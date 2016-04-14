@@ -388,6 +388,8 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
 
   'event_manager:add_attendees_to_group' => 'Deelnemers toevoegen aan groep',
   'event_manager:add_attendees_to_group:select' => 'Voeg deelnemers toe aan de groep',
+  'event_manager:add_attendees_to_group:no_group' => 'Geen geldige groep',
+  'event_manager:add_attendees_to_group:no_groups' => 'Er is geen groep waarin je groepsbeheerder bent',
   'event_manager:add_attendees_to_group:add_to_site' => 'De deelnemers ook aan de site toevoegen',
   'event_manager:add_attendees_to_group:add_to_site:disabled' => 'Deze functionaliteit is niet beschikbaar omdat je geen site-beheerder bent.',
   'event_manager:add_attendees_to_group:added' => '%s deelnemers toegevoegd aan de groep en %s deelnemers toegevoegd aan de site.',

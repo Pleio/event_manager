@@ -17,7 +17,7 @@ if ($group_guid) {
 }
 
 if (!$group || !elgg_instanceof($group, "group") || !$group->canEdit()) {
-    register_error('event_manager:add_attendees_to_group:no_group');
+    register_error(elgg_echo('event_manager:add_attendees_to_group:no_group'));
     forward(REFERER);
 }
 

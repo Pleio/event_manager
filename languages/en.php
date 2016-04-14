@@ -411,6 +411,8 @@ If you didn't register for this event, you can ignore this email or click on the
 
 		'event_manager:add_attendees_to_group' => 'Add attendees to a group',
 		'event_manager:add_attendees_to_group:select' => 'Add attendees to the group',
+		'event_manager:add_attendees_to_group:no_group' => 'No valid group',
+		'event_manager:add_attendees_to_group:no_groups' => 'You are no administrator in any of the groups',
 		'event_manager:add_attendees_to_group:add_to_site' => 'Also add attendees to the site',
 		'event_manager:add_attendees_to_group:add_to_site:disabled' => 'This functionality is disabled as you are not a site administrator.',
 		'event_manager:add_attendees_to_group:added' => 'Added %s attendees to the group, added %s attendees to the site.',
