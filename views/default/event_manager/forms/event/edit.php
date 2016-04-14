@@ -40,7 +40,7 @@ $fields = array(
 	"event_presenting" => 0,
 	"event_exhibiting" => 0,
 	"event_organizing" => 0,
-	"registration_completed" => ELGG_ENTITIES_ANY_VALUE,
+	"registration_confirmation" => ELGG_ENTITIES_ANY_VALUE,
 );
 
 $region_options = event_manager_event_region_options();
@@ -401,10 +401,10 @@ $extra_body .= elgg_view('input/checkboxes', array(
 
 $extra_body .= "</td></tr>";
 $extra_body .= "<tr>";
-$extra_body .= "<td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:registration_completed') . "</td>";
+$extra_body .= "<td class='event_manager_event_edit_label'>" . elgg_echo('event_manager:edit:form:registration_confirmation') . "</td>";
 $extra_body .= "<td>";
-$extra_body .= elgg_view('input/longtext', array('name' => 'registration_completed', 'value' => $fields["registration_completed"]));
-$extra_body .= "<div class='elgg-subtext'>" . elgg_echo("event_manager:edit:form:registration_completed:description") . "</div>";
+$extra_body .= elgg_view('input/longtext', array('name' => 'registration_confirmation', 'value' => $fields["registration_confirmation"]));
+$extra_body .= "<div class='elgg-subtext'>" . elgg_echo("event_manager:edit:form:registration_confirmation:description") . "</div>";
 $extra_body .= "</td>";
 $extra_body .= "</tr>";
 

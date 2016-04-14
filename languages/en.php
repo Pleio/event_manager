@@ -106,9 +106,8 @@
 		'event_manager:edit:form:spots_left:waiting_list' => ' attendee(s) on the waiting list',
 		'event_manager:edit:form:currenticon' => 'Current icon',
 		'event_manager:edit:form:icon' => 'Event icon (leave blank to leave unchanged)',
-		'event_manager:edit:form:registration_completed' => 'Text when the event registration is completed',
-		'event_manager:edit:form:registration_completed:description' => 'If you add [NAME] the name of the registered user is displayed. If you add [EVENT] the name of the event is displayed.',
-
+		'event_manager:edit:form:registration_confirmation' => 'Add text to registration confirmation e-mail',
+		'event_manager:edit:form:registration_confirmation:description' => 'This option allows you to add a custom text to the registration confirmation e-mail.',
 		'event_manager:edit:form:slot_set' => 'Set',
 		'event_manager:edit:form:slot_set:add' => 'Add set',
 		'event_manager:edit:form:slot_set:empty' => 'No set specified',

@@ -44,7 +44,7 @@
 	$event_exhibiting = get_input("event_exhibiting");
 	$event_organizing = get_input("event_organizing");
 
-	$registration_completed = get_input("registration_completed");
+	$registration_confirmation = get_input("registration_confirmation");
 
 	$waiting_list_enabled = get_input("waiting_list_enabled");
 
@@ -179,7 +179,7 @@
 		$event->event_organizing = $event_organizing;
 
 		$event->waiting_list_enabled = $waiting_list_enabled;
-		$event->registration_completed = $registration_completed;
+		$event->registration_confirmation = $registration_confirmation;
 
 		$eventDays = $event->getEventDays();
 		if ($with_program && !$eventDays) {

@@ -445,40 +445,36 @@
 
 				// notify the attending user
 				$user_subject = elgg_echo('event_manager:event:registration:notification:user:subject');
-
 				$user_message = elgg_echo('event_manager:event:registration:notification:user:text:' . $type, array(
 					$to_entity->name,
 					$event_title_link));
 
-				$user_message .= $registrationLink;
+				if ($type == EVENT_MANAGER_RELATION_ATTENDING && $this->registration_confirmation) {
+					$user_message .= $this->registration_confirmation;
+				}
 
+				$user_message .= $registrationLink;
 				$user_message .= $unsubscribeLink;
 
-				if ($to_entity instanceof ElggUser) {
-					// use notification system for real users
-					notify_user($to, $this->getOwnerGUID(), $user_subject, $user_message);
-				} else {
-					// send e-mail for non users
-					$to_email = $to_entity->name . "<" . $to_entity->email . ">";
+				$to_email = $to_entity->name . "<" . $to_entity->email . ">";
 
-					$site = elgg_get_site_entity($this->site_guid);
-					if ($site->email){
-						if ($site->name) {
-							$site_from = $site->name . " <" . $site->email . ">";
-						} else {
-							$site_from = $site->email;
-						}
+				$site = elgg_get_site_entity($this->site_guid);
+				if ($site->email){
+					if ($site->name) {
+						$site_from = $site->name . " <" . $site->email . ">";
 					} else {
-						// no site email, so make one up
-						if ($site->name) {
-							$site_from = $site->name . " <noreply@" . get_site_domain($site->getGUID()) . ">";
-						} else {
-							$site_from = "noreply@" . get_site_domain($site->getGUID());
-						}
+						$site_from = $site->email;
 					}
-
-					elgg_send_email($site_from, $to_email, $user_subject, $user_message);
+				} else {
+					// no site email, so make one up
+					if ($site->name) {
+						$site_from = $site->name . " <noreply@" . get_site_domain($site->getGUID()) . ">";
+					} else {
+						$site_from = "noreply@" . get_site_domain($site->getGUID());
+					}
 				}
+
+				elgg_send_email($site_from, $to_email, $user_subject, $user_message);
 			}
 
 			elgg_set_ignore_access($ia);
