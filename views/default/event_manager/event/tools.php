@@ -8,9 +8,8 @@
 	$toolLinks .= "<li>" . elgg_view("output/confirmlink", array("href" => "action/event_manager/event/delete?guid=" . $event->getGUID(), "text" => elgg_echo("event_manager:event:deleteevent"))) . "</li>";
 	$toolLinks .= "<li>" . elgg_view("output/url", array("href" => "events/event/upload/" . $event->getGUID(), "text" => elgg_echo("event_manager:event:uploadfiles"))) . "</li>";
 	$toolLinks .= "<li>" . elgg_view("output/url", array("is_action" => true, "href" => "action/event_manager/event/copy?guid=" . $event->getGUID(), "text" => elgg_echo("event_manager:event:copyevent"))) . "</li>";
-
 	$toolLinks .= "<li>" . elgg_view("output/url", array("href" => "events/registrationform/edit/" . $event->getGUID(), "text" => elgg_echo("event_manager:event:editquestions"))) . "</li>";
-
+	$toolLinks .= "<li>" . elgg_view("output/url", array("href" => "events/event/mail/" . $event->getGUID(), "text" => elgg_echo("event_manager:mail"))) . "</li>";
 	$toolLinks .= "<li>" . elgg_view("output/url", array("href" => "events/event/add_attendees_to_group/" . $event->getGUID(), "text" => elgg_echo("event_manager:event:attendeestogroup"))) . "</li>";
 	$toolLinks .= "<li>" . elgg_view("output/url", array("is_action" => true, "href" => "action/event_manager/attendees/export?guid=" . $event->getGUID(), "text" => elgg_echo("event_manager:event:exportattendees"))) . "</li>";
 

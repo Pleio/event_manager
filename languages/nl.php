@@ -412,6 +412,16 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
 
   %s
 
-  We hebben je bestaande account met de gebruikersnaam %s gebruikt om je toe te voegen. Wanneer je het wachtwoord vergeten bent gebruik de "wachtwoord vergeten" knop om een nieuw wachtwoord aan te vragen.'
+  We hebben je bestaande account met de gebruikersnaam %s gebruikt om je toe te voegen. Wanneer je het wachtwoord vergeten bent gebruik de "wachtwoord vergeten" knop om een nieuw wachtwoord aan te vragen.',
+  'event_manager:mail' => 'Verstuur mail naar deelnemers',
+  'event_manager:mail:subject' => 'Onderwerp',
+  'event_manager:mail:message' => 'Bericht',
+  'event_manager:mail:send_test' => 'Verstuur test naar mezelf',
+  'event_manager:mail:send' => 'Verstuur naar deelnemers',
+  'event_manager:mail:subject_missing' => 'Het veld onderwerp ontbreekt',
+  'event_manager:mail:message_missing' => 'Het veld bericht ontbreekt',
+  'event_manager:mail:test_messages_sent' => 'Testbericht is verstuurd naar jouw adres.',
+  'event_manager:mail:messages_sent' => 'Bericht is verstuurd naar de deelnemers (%s).',
+  'event_manager:mail:please_wait' => 'Nadat je geklikt hebt op bericht versturen kan het een tijdje duren voordat alle berichten verstuurd zijn.'
 );
 add_translation("nl", $language);

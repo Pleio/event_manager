@@ -433,7 +433,18 @@ If you didn't register for this event, you can ignore this email or click on the
 
 		%s
 
-		We used your existing account with username %s to add you to the group. If you lost your password request a new one with the button "lost password".'
+		We used your existing account with username %s to add you to the group. If you lost your password request a new one with the button "lost password".',
+
+		'event_manager:mail' => 'Send attendees an e-mail',
+		'event_manager:mail:subject' => 'Subject',
+		'event_manager:mail:message' => 'Message',
+		'event_manager:mail:send_test' => 'Send test to myself',
+		'event_manager:mail:send' => 'Send mail to attendees',
+		'event_manager:mail:subject_missing' => 'The field subject is missing',
+		'event_manager:mail:message_missing' => 'The field message is missing',
+		'event_manager:mail:test_messages_sent' => 'Test message is sent to your address.',
+		'event_manager:mail:messages_sent' => 'Messages are sent to the attendees (%s).',
+		'event_manager:mail:please_wait' => 'After you pressed the send mail to attendees button it can take a while before all the mails are sent.'
 	);
 
 	add_translation('en', $english);

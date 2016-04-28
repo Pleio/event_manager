@@ -149,6 +149,9 @@
 						case "list":
 							set_input("owner_guid", $page[2]);
 							break;
+						case "mail":
+							set_input("owner_guid", $page[2]);
+							break;
 						case "add_attendees_to_group":
 							set_input("owner_guid", $page[2]);
 							break;
@@ -213,6 +216,7 @@
 	elgg_register_action("event_manager/event/unsubscribe_confirm",		dirname(__FILE__) . "/actions/event/unsubscribe_confirm.php", "public");
 	elgg_register_action("event_manager/event/resend_confirmation",		dirname(__FILE__) . "/actions/event/resend_confirmation.php");
 	elgg_register_action("event_manager/attendees/export",				dirname(__FILE__) . "/actions/attendees/export.php");
+	elgg_register_action("event_manager/attendees/mail", 				dirname(__FILE__) . "/actions/attendees/mail.php");
 	elgg_register_action("event_manager/attendees/add_to_group",		dirname(__FILE__) . "/actions/attendees/add_to_group.php");
 	elgg_register_action("event_manager/attendees/export_waitinglist",	dirname(__FILE__) . "/actions/attendees/exportwaitinglist.php");
 	elgg_register_action("event_manager/attendees/move_to_attendees",	dirname(__FILE__) . "/actions/attendees/move_to_attendees.php");
