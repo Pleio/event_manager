@@ -30,7 +30,7 @@
 			if($question && !empty($question)) {
 				$question->title			= $questiontext;
 				$question->container_guid	= $event->getGUID();
-				$question->owner_guid		= $event->getGUID();
+				$question->owner_guid		= $event->owner_guid;
 				$question->access_id		= $event->access_id;
 				
 				if($question->save()) {

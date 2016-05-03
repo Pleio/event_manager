@@ -37,7 +37,7 @@
 				$day->title = $title;
 				$day->description = $description;
 				$day->container_guid = $event->getGUID();
-				$day->owner_guid = $event->getGUID();
+				$day->owner_guid = $event->owner_guid;
 				$day->access_id = $event->access_id;
 				
 				if ($day->save()) {

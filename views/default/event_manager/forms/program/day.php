@@ -21,7 +21,7 @@
 		if($entity instanceof EventDay){
 			// assume day edit mode
 			$guid 			= $entity->getGUID();
-			$parent_guid	= $entity->owner_guid;	
+			$parent_guid	= $entity->container_guid;	
 			$title 			= $entity->title;
 			$description 	= $entity->description;
 			$date 			= $entity->date;	
@@ -30,7 +30,7 @@
 			}
 		} else {
 			// entity is a event
-			$parent_guid	= $entity->getGUID();
+			$parent_guid = $entity->getGUID();
 			
 			// make nice default date
 			$days = $entity->getEventDays();

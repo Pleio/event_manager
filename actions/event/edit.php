@@ -186,7 +186,7 @@
 			$eventDay = new EventDay();
 			$eventDay->title = 'Event day 1';
 			$eventDay->container_guid = $event->getGUID();
-			$eventDay->owner_guid = $event->getGUID();
+			$eventDay->owner_guid = $event->owner_guid;
 			$eventDay->access_id = $event->access_id;
 			$eventDay->save();
 			$eventDay->date = $event->start_day;
