@@ -25,17 +25,27 @@
 				);
 
 				$registrations = elgg_get_entities_from_metadata($options);
+				$loggedin_user = elgg_get_logged_in_user_entity();
+
+				// maybe the registration was done by a real user
 				if (!$registrations) {
 					$user = get_user_by_email($email);
 					if ($user) {
 						$user = $user[0];
-						if ($entity->isAttending($user->guid)) {
+					}
+
+					if ($user && $entity->isAttending($user->guid)) {
+						if ($user == $loggedin_user) {
+							$entity->rsvp(EVENT_MANAGER_RELATION_UNDO, $user_guid);
+							system_message(elgg_echo("event_manager:event:relationship:message:" . EVENT_MANAGER_RELATION_UNDO));
+							forward($entity->getURL());
+						} else {
 							register_error(elgg_echo("event_manager:unsubscribe:login"));
 							forward($entity->getURL());
 						}
 					}
 				}
-				
+
 				if ($registrations = elgg_get_entities_from_metadata($options)) {
 					$registration = $registrations[0];
 					
