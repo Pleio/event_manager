@@ -30,7 +30,11 @@
 						$member_entity = get_entity($member);
 						$member_info = elgg_view_entity_icon($member_entity, "small", array("event" => $event));
 						
-						if($event->canEdit()){
+						if (!$member_entity instanceof ElggUser && !$event->canEdit()) {
+							continue;
+						}
+
+						if($event->canEdit()) {
 							$rel = $member_entity->name;
 							
 							if($member_entity instanceof ElggUser){
@@ -41,6 +45,7 @@
 							
 							$member_info = "<span class='event-manager-event-view-attendee-info' rel='" . $rel . "'>" . $member_info . "</span>";
 						}
+
 						$rel_content .= $member_info;
 						
 					}
