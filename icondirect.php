@@ -43,7 +43,7 @@ if ($mysql_dblink) {
 	if ($simplecache_enabled) {
 		// first try to read icon directly
 		$user_path = date('Y/m/d/', $joindate) . $guid;
-		$filename = "$dataroot$user_path/event/{$guid}/{$size}.jpg";
+		$filename = "$CONFIG->dataroot$user_path/event/{$guid}/{$size}.jpg";
 		$contents = @file_get_contents($filename);
 		if (!empty($contents)) {
 			header("Content-type: image/jpeg");
