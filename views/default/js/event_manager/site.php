@@ -108,16 +108,7 @@ function event_manager_program_add_day(form){
 	
 	$.post(elgg.get_site_url() + 'events/proc/day/edit', $(form).serialize(), function(response) {
 		if(response.valid) {
-			$.fancybox.close();
-			guid = response.guid;
-			if(response.edit){
-				$("#day_" + guid + " .event_manager_program_day_details").html(response.content_body);
-				$("#event_manager_event_view_program a[rel='day_" + guid + "']").html(response.content_title).click();
-			} else {
-				$("#event_manager_event_view_program").after(response.content_body);
-				$("#event_manager_event_view_program li:last").before(response.content_title);
-				$("#event_manager_event_view_program a[rel='day_" + guid + "']").click();
-			}
+			location.reload();
 		} else {
 			$(form).find("input[type='submit']").show();
 		}
@@ -129,15 +120,7 @@ function event_manager_program_add_slot(form){
 	
 	$.post(elgg.get_site_url() + 'events/proc/slot/edit', $(form).serialize(), function(response) {
 		if(response.valid) {
-			$.fancybox.close();
-			
-			guid = response.guid;
-			parent_guid = response.parent_guid;
-			if(response.edit){
-				$("#" + guid).replaceWith(response.content);
-			} else {
-				$("#day_" + parent_guid).find("a.event_manager_program_slot_add").before(response.content);
-			}
+			location.reload();
 		} else {
 			$(form).find("input[type='submit']").show();
 		}

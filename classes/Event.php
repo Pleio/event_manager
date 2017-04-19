@@ -42,6 +42,20 @@
 			}
 		}
 
+		public function getAllSlotSets() {
+			$days = $this->getEventDays();
+			if (!$days) {
+				return [];
+			}
+
+			$slots = [];
+			foreach ($days as $day) {
+				$slots = array_merge($slots, $day->getEventSlotSets());
+			}
+			
+			return array_unique($slots);
+		}
+
 		public function setAccessToRegistrationForm($access_id = null) {
 			if ($access_id == null) {
 				$access_id = $this->access_id;

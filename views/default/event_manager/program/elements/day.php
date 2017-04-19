@@ -3,6 +3,7 @@
 	$day = $vars["entity"];
 	$participate = $vars['participate'];
 	$register_type = $vars['register_type'];
+	$title = $vars["title"];
 	
 	if(!empty($day) && ($day instanceof EventDay)){
 		$can_edit = $day->canEdit();
@@ -32,12 +33,16 @@
 			
 			$result .= '<div class="event_manager_program_day_details" rel="' . $day->getGUID() . '">';
 			
+			if ($title) {
+				$result .= "<h3>{$title}</h3>";
+			}
+
 			$result .= $details;
 			
 			$result .= '</div>';
 			
 			if($daySlots = $day->getEventSlots()){
-				foreach($daySlots as $slot){
+				foreach($daySlots as $slot) {
 					$result .= elgg_view("event_manager/program/elements/slot", array("entity" => $slot, 'participate' => $participate, 'register_type' => $register_type, "member" => $vars["member"]));							
 				}
 			}

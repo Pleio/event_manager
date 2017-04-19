@@ -27,6 +27,7 @@ $fields = array(
 	"registration_ended" => ELGG_ENTITIES_ANY_VALUE,
 	"endregistration_day" => ELGG_ENTITIES_ANY_VALUE,
 	"with_program" => ELGG_ENTITIES_ANY_VALUE,
+	"require_slots" => ELGG_ENTITIES_ANY_VALUE,
 	"register_nologin" => ELGG_ENTITIES_ANY_VALUE,
 	"show_attendees" => 0,
 	"hide_owner_block" => ELGG_ENTITIES_ANY_VALUE,
@@ -273,6 +274,15 @@ $registration_body .= elgg_view('input/checkboxes', array(
 		'value' => $fields["with_program"],
 		'options' => array(
 				elgg_echo('event_manager:edit:form:with_program') => '1'
+		)
+));
+
+$registration_body .= elgg_view('input/checkboxes', array(
+		'name' => 'require_slots',
+		'id' => 'require_slots',
+		'value' => $fields["require_slots"],
+		'options' => array(
+				elgg_echo('event_manager:edit:form:require_slots') => '1'
 		)
 ));
 

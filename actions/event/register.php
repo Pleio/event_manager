@@ -5,8 +5,11 @@
 	
 	$register_type = get_input('register_type');
 	
-	$program_guids = get_input('program_guids');
-	
+	$program_guids = get_input('program_guids', []);
+	foreach ($program_guids as $key => $value) {
+		$program_guids[$key] = (int) $value;
+	}
+
 	$answers = array();
 	foreach ($_POST as $key => $value) {
 		$value = get_input($key);
@@ -58,36 +61,48 @@
 				}
 
 			}
+
+			if ($program_guids) {
+				$_SESSION["registerevent_values"]["program_guids"] = $program_guids;
+			}
 			
 			if ($event->with_program && !$required_error) {
 				if (empty($program_guids)) {
 					$required_error = true;
-				} else {
-					// validate slot sets
-					$slot_options = array(
-							"type" => "object",
-							"subtype" => EventSlot::SUBTYPE,
-							"limit" => false,
-							"metadata_names" => "slot_set",
-							"guids" => explode(',', $program_guids)
-					);
-					
-					if ($set_metadata = elgg_get_metadata($slot_options)) {
-						$sets_found = array();
-						foreach ($set_metadata as $md){
-							$set_name = $md->value;
-							if(in_array($set_name, $sets_found)){
-								// only one programguid per slot is allowed
-								register_error(elgg_echo("event_manager:action:registration:edit:error_slots", array($set_name)));
-								forward($forward_url);
-							}
-							$sets_found[] = $set_name;
+				}
+
+				$all_sets = $event->getAllSlotSets();
+
+				// validate slot sets
+				$slot_options = array(
+						"type" => "object",
+						"subtype" => EventSlot::SUBTYPE,
+						"limit" => false,
+						"metadata_names" => "slot_set",
+						"guids" => explode(',', $program_guids)
+				);
+				
+				$sets_found = [];
+				if ($set_metadata = elgg_get_metadata($slot_options)) {
+					foreach ($set_metadata as $md){
+						$set_name = $md->value;
+						if(in_array($set_name, $sets_found)){
+							// only one programguid per slot is allowed
+							register_error(elgg_echo("event_manager:action:registration:edit:error_slots", array($set_name)));
+							forward($forward_url);
 						}
+						$sets_found[] = $set_name;
 					}
+				}
+
+				$missing_sets = array_diff($all_sets, $sets_found);
+				if ($event->require_slots === "1" && count($missing_sets) > 0) {
+					register_error(elgg_echo("event_manager:action:registration:edit:error_required_slots"));
+					forward($forward_url);
 				}
 			}
 			
-			if ($required_error)	{
+			if ($required_error) {
 				if ($event->with_program) {
 					if ($questions) {
 						register_error(elgg_echo("event_manager:action:registration:edit:error_fields_with_program"));

@@ -36,6 +36,8 @@
 	$waiting_list = get_input("waiting_list");
 	$access_id = get_input("access_id");
 	$with_program = get_input("with_program");
+	$require_slots = get_input("require_slots");
+
 	$delete_current_icon = get_input("delete_current_icon");
 	$register_nologin = get_input("register_nologin");
 
@@ -170,6 +172,7 @@
 		}
 
 		$event->with_program = $with_program;
+		$event->require_slots = $require_slots;
 		$event->endregistration_day = $endregistration_day;
 		$event->register_nologin = $register_nologin;
 

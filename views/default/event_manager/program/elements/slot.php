@@ -3,6 +3,7 @@
 	$slot = $vars["entity"];
 	$participate = $vars["participate"];
 	$register_type = $vars["register_type"];
+	$selected_program_guids = explode(",", $_SESSION["registerevent_values"]["program_guids"]);
 	
 	if(!empty($slot) && ($slot instanceof EventSlot)) {
 		$result = "<table id='" . $slot->getGUID() . "'>";
@@ -30,11 +31,18 @@
 				}
 			} else {
 				if($participate &&  ($slot->hasSpotsLeft() || $register_type == 'waitinglist')) {
+					if (in_array($slot->guid, $selected_program_guids)) {
+						$checkbox_options["checked"] = "checked";	
+					}
+
 					$registered_for_slot = elgg_view('input/checkbox', $checkbox_options);
 				}
 			}
 		} else {
 			if($participate && ($slot->hasSpotsLeft() || $register_type == 'waitinglist')) {
+				if (in_array($slot->guid, $selected_program_guids)) {
+					$checkbox_options["checked"] = "checked";	
+				}
 				$registered_for_slot = elgg_view('input/checkbox', $checkbox_options);
 			} elseif(!empty($vars["member"]) && check_entity_relationship($vars["member"], EVENT_MANAGER_RELATION_SLOT_REGISTRATION, $slot->getGUID())){
 				$registered_for_slot = '<div title="' . elgg_echo("event_manager:event:relationship:event_attending") . '" class="event_manager_program_slot_attending_user"></div>';

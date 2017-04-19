@@ -82,6 +82,9 @@
 		'event_manager:edit:form:organizer' => 'Organizer',
 		'event_manager:edit:form:organizer_rsvp' => 'Add me as organizer to this event',
 		'event_manager:edit:form:with_program' => 'Specify daily program?',
+		'event_manager:edit:form:require_slots' => 'Require participants to fill in all slots of the program',
+		'event_manager:slots:explanation' => 'This program contains slot sets. You can only select one slot for each set.',
+		'event_manager:slots:required' => 'Further it is required to choose a slot for every activity.',
 		'event_manager:edit:form:delete_current_icon' => 'Delete current icon?',
 		'event_manager:edit:form:comments_on' => 'Comments on?',
 		'event_manager:edit:form:registration_ended' => 'Disable registration to this event',
@@ -297,6 +300,7 @@ Someone signed off from the '%s' event. You are moved from the waiting list to a
 		// actions
 		'event_manager:action:event:edit:ok' => 'Event saved',
 		'event_manager:action:event:edit:error_fields' => 'Fill in the required fields',
+		'event_manager:action:registration:edit:error_required_slots' => 'Not all slots are filled in. Please note you need to register for every slot.',
 		'event_manager:action:registration:edit:error_fields_with_program' => 'Fill in the required fields and select at least 1 activity slot to attend to',
 		'event_manager:action:registration:edit:error_fields_program_only' => 'Select at least 1 activity slot to attend to',
 		'event_manager:action:registration:edit:error_slots' => 'You can only select one slot for each set. More than one are detected for the set %s.',
