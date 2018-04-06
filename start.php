@@ -29,6 +29,11 @@
 	require_once(dirname(__FILE__) . "/lib/events.php");
 
 	function event_manager_init() {
+		$lang = get_current_language();
+		if ($lang == "nl") {
+			setlocale(LC_TIME, "nl_NL");
+		}
+
 		// Register entity_type for search
 		elgg_register_entity_type("object", Event::SUBTYPE);
 

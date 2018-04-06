@@ -7,7 +7,7 @@
 		$start_day = $entity->start_day;
 		
 		$icon = "<div class='event_manager_event_list_icon' title='" . date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $start_day) . "'>";
-		$icon .= "<div class='event_manager_event_list_icon_month'>" . strtoupper(date("M", $start_day)) . "</div>";
+		$icon .= "<div class='event_manager_event_list_icon_month'>" . strtoupper(strftime("%b", $start_day)) . "</div>";
 		$icon .= "<div class='event_manager_event_list_icon_day'>" . date("d", $start_day) . "</div>";
 		$icon .= "</div>";
 		
