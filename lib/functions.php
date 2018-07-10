@@ -346,8 +346,9 @@
 						$answer = $question->getAnswerFromUser($attendee->getGUID());
 						$answerString .= '"'.addslashes($answer->value).'";';
 					}
+					$dataString .= ';';
 				}
-				$dataString .= ';'.substr($answerString, 0, (strlen($answerString) -1));
+				$dataString .= ''.substr($answerString, 0, (strlen($answerString) -1));
 
 				if($event->with_program) {
 					if($eventDays = $event->getEventDays()) {
@@ -429,8 +430,9 @@
 
 						$answerString .= '"'.addslashes($answer->value).'";';
 					}
+					$dataString .= ';';
 				}
-				$dataString .= ';'.substr($answerString, 0, (strlen($answerString) -1));
+				$dataString .= ''.substr($answerString, 0, (strlen($answerString) -1));
 
 				if($event->with_program) {
 					if($eventDays = $event->getEventDays()) {
