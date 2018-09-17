@@ -373,7 +373,7 @@ Je hebt je uit het \'%s\' evenement uitgeschreven.
   'event_manager:settings:migration:group:whocancreate:no_one' => 'niemand',
   'event_manager:river:event_relationship:create:event_attending' => '%s is aanwezig bij %s',
   'event_manager:river:event_relationship:create:event_interested' => '%s is geinteresseert in %s',
-  'event_manager:river:event_relationship:create:event_presenting' => '%s presenteerd bij %s',
+  'event_manager:river:event_relationship:create:event_presenting' => '%s presenteert bij %s',
   'event_manager:river:event_relationship:create:event_exhibiting' => '%s is exposant bij %s',
   'event_manager:river:event_relationship:create:event_organizing' => '%s organiseert %s',
   'calculate_route' => 'Route berekenen',
