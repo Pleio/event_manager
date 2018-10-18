@@ -282,98 +282,117 @@
 		return $dt;
 	}
 
-	function event_manager_export_attendees($event, $file = false) {
+	function event_manager_export_attendees($event) {
+		$dbprefix = elgg_get_config("dbprefix");
+
 		$old_ia = elgg_get_ignore_access();
 		elgg_set_ignore_access(true);
 
-		if($file) {
-			$EOL = "\r\n";
-		} else {
-			$EOL = PHP_EOL;
-		}
+		$f = fopen('php://output', 'w');
 
-		$headerString .= '"'.elgg_echo('guid').'";"'.elgg_echo('name').'";"'.elgg_echo('email').'";"'.elgg_echo('username') . '";"' . elgg_echo('registration date') . '"';
+		$output = [
+			elgg_echo('guid'),
+			elgg_echo('name'),
+			elgg_echo('email'),
+			elgg_echo('username'),
+			elgg_echo('rsvp'),
+			elgg_echo('rsvp date')
+		];
 
         if ($event->separate_first_lastname) {
-            $headerString .= ';"' . elgg_echo('user:firstname:label') . '"';
-            $headerString .= ';"' . elgg_echo('user:lastname:label') . '"';
+			$output[] = elgg_echo('user:firstname:label');
+			$output[] = elgg_echo('user:lastname:label');
         }
 
-		if($registration_form = $event->getRegistrationFormQuestions()) {
-			foreach($registration_form as $question) {
-				$headerString .= ';"'.$question->title.'"';
+		$registration_form = $event->getRegistrationFormQuestions() ?: [];
+		foreach($registration_form as $question) {
+			$output[] = $question->title;
+		}
+
+		if ($event->with_program) {
+			$eventDays = $event->getEventDays() ?: [];
+
+			foreach($eventDays as $eventDay) {
+				$date = date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $eventDay->date);
+				$eventSlots = $eventDay->getEventSlots() ?: [];
+
+				foreach($eventSlots as $eventSlot) {
+					$start_time = $eventSlot->start_time;
+					$end_time = $eventSlot->end_time;
+
+					$start_time_hour = date('H', $start_time);
+					$start_time_minutes = date('i', $start_time);
+
+					$end_time_hour = date('H', $end_time);
+					$end_time_minutes = date('i', $end_time);
+
+					$output[] = "{$eventSlot->title} {$date} ({$start_time_hour}:{$start_time_minutes} - {$end_time_hour}:{$end_time_minutes})";
+				}
 			}
 		}
 
-		if($event->with_program) {
-			if($eventDays = $event->getEventDays()) {
-				foreach($eventDays as $eventDay) {
-					$date = date(EVENT_MANAGER_FORMAT_DATE_EVENTDAY, $eventDay->date);
-					if($eventSlots = $eventDay->getEventSlots()) {
-						foreach($eventSlots as $eventSlot) {
-							$start_time = $eventSlot->start_time;
-							$end_time = $eventSlot->end_time;
+		fputcsv($f, $output, ";");
 
-							$start_time_hour = date('H', $start_time);
-							$start_time_minutes = date('i', $start_time);
+		$query = "SELECT * FROM {$dbprefix}entity_relationships WHERE guid_one={$event->guid}";
 
-							$end_time_hour = date('H', $end_time);
-							$end_time_minutes = date('i', $end_time);
+		$relationships = get_data($query, "row_to_relationship") ?: [];
+		foreach ($relationships as $relationship) {
+			if (!in_array($relationship->relationship, [
+				EVENT_MANAGER_RELATION_ATTENDING,
+				EVENT_MANAGER_RELATION_ATTENDING_WAITINGLIST,
+				EVENT_MANAGER_RELATION_ATTENDING_PENDING,
+				EVENT_MANAGER_RELATION_EXHIBITING,
+				EVENT_MANAGER_RELATION_ORGANIZING,
+				EVENT_MANAGER_RELATION_PRESENTING,
+				EVENT_MANAGER_RELATION_INTERESTED,
+			])) {
+				continue;
+			};
 
-							$headerString .= ';"Event activity: \'' . addslashes($eventSlot->title) . '\' ' . $date . ' (' . $start_time_hour . ':' . $start_time_minutes . ' - ' . $end_time_hour . ':' . $end_time_minutes . ')"';
+			$attendee = get_entity($relationship->guid_two);
+			if (!$attendee) {
+				continue;
+			}
+
+			$output = [
+				$attendee->guid,
+				$attendee->name,
+				$attendee->email,
+				$attendee->username,
+				elgg_echo("event_manager:event:relationship:{$relationship->relationship}:label"),
+				date("d-m-Y H:i:s", $relationship->time_created)
+			];
+
+			if ($event->separate_first_lastname) {
+				$output[] = $attendee->firstname;
+				$output[] = $attendee->lastname;
+			}
+
+			$registration_form = $event->getRegistrationFormQuestions() ?: [];
+			foreach ($registration_form as $question) {
+				$answer = $question->getAnswerFromUser($attendee->guid);
+				$output[] = $answer->value;
+			}
+
+			if ($event->with_program) {
+				$eventDays = $event->getEventDays() ?: [];
+				foreach ($eventDays as $eventDay) {
+					$eventSlots = $eventDay->getEventSlots() ?: [];
+					foreach ($eventSlots as $eventSlot) {
+						$relationship = check_entity_relationship($attendee->guid, EVENT_MANAGER_RELATION_SLOT_REGISTRATION, $eventSlot->guid);
+						if ($relationship) {
+							$output[] = "V";
+						} else {
+							$output[] = "";
 						}
 					}
 				}
 			}
+
+			fputcsv($f, $output, ";");
 		}
 
-		if($attendees = $event->exportAttendees()) {
-			foreach($attendees as $attendee) {
-				$answerString = '';
-
-				$dataString .= '"'.$attendee->guid.'";"'.$attendee->name.'";"'.$attendee->email.'";"'.$attendee->username.'"';
-
-				$relation = check_entity_relationship($event->guid, EVENT_MANAGER_RELATION_ATTENDING, $attendee->guid);
-				$dataString .= ';"' . date("d-m-Y H:i:s", $relation->time_created) . '"';
-
-				if ($event->separate_first_lastname) {
-					$dataString .= ';"' . $attendee->firstname . '"';
-					$dataString .= ';"' . $attendee->lastname . '"';
-				}
-
-				if($registration_form = $event->getRegistrationFormQuestions()) {
-					foreach($registration_form as $question) {
-						$answer = $question->getAnswerFromUser($attendee->getGUID());
-						$answerString .= '"'.addslashes($answer->value).'";';
-					}
-					$dataString .= ';';
-				}
-				$dataString .= ''.substr($answerString, 0, (strlen($answerString) -1));
-
-				if($event->with_program) {
-					if($eventDays = $event->getEventDays()) {
-						foreach($eventDays as $eventDay) {
-							if($eventSlots = $eventDay->getEventSlots()) {
-								foreach($eventSlots as $eventSlot) {
-									if(check_entity_relationship($attendee->getGUID(), EVENT_MANAGER_RELATION_SLOT_REGISTRATION, $eventSlot->getGUID())) {
-										$dataString .= ';"V"';
-									} else {
-										$dataString .= ';""';
-									}
-								}
-							}
-						}
-					}
-				}
-
-				$dataString .= $EOL;
-			}
-		}
-
-		$headerString .= $EOL;
-		elgg_set_ignore_access($old_ia);
-
-		return $headerString . $dataString;
+		fclose($f);
 	}
 
 	function event_manager_export_waitinglist($event, $file = false) {

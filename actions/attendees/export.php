@@ -13,7 +13,7 @@
 		header("Content-Disposition: Attachment; filename=export.csv");
 		header('Pragma: public');
 		
-		echo event_manager_export_attendees($event, true);
+		event_manager_export_attendees($event);
 		exit;
 	} else {
 		register_error(elgg_echo("InvalidParameterException:GUIDNotFound", array($guid)));
